@@ -15,6 +15,6 @@ int main(int ac, char **av)
 		ft_putendl(line);
 		//ft_putendl("END OF BUFF_SIZE");
 	}
-	//close(fd);
+	close(fd);
 	return 0;
 }
