@@ -1,5 +1,5 @@
 #include "get_next_line.h"
-
+#include <stdio.h>
 size_t	find_newline(char *store)
 {
 	int		counter;
@@ -16,10 +16,9 @@ int readline(char **store, char **line) //function to read until a '\n' is found
 {
 	char	*temp;
 	int		pos;
-	char	*stackbuff;
-
+	//char	*stackbuff;
 	pos = 0;
-	if (ft_strchr(*stackbuff, '\n') != NULL)
+	if (ft_strchr(*store, '\n') != NULL)
 	{
 		pos = find_newline(*store); //takes the index number where '\n' is found
 
@@ -34,8 +33,6 @@ int readline(char **store, char **line) //function to read until a '\n' is found
 		ft_strdel(store);
 	}
 	return(1);
-
-
 }
 
 int get_next_line(int fd, char **line)
@@ -56,8 +53,8 @@ int get_next_line(int fd, char **line)
 	}
 	if	(bytes < 0 )
 		return(-1);
-	else if	(bytes == 0 && (store == NULL || store == '\0'))
-			return(0);
+	else if	(bytes == 0 && ft_strlen(store) == 0)
+		return(0);
 	else
 		return	(readline(&store, line));
 }

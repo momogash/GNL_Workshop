@@ -13,8 +13,10 @@ int main(int ac, char **av)
 	while ((result = get_next_line(fd, &line)) > 0)
 	{
 		ft_putendl(line);
-		//ft_putendl("END OF BUFF_SIZE");
+		sleep(10);
+		ft_putendl("END OF BUFF_SIZE");
 	}
+	
 	close(fd);
 	return 0;
 }

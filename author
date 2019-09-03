@@ -1,1 +1,3 @@
 momogash
+INT_MAX is a macro that specifies that an integer variable cannot store any value beyond this limit.
+INT_MIN specifies that an integer variable cannot store any value below this limit.
