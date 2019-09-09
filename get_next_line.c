@@ -16,7 +16,6 @@ int readline(char **store, char **line) //function to read until a '\n' is found
 {
 	char	*temp;
 	int		pos;
-	//char	*stackbuff;
 	pos = 0;
 	if (ft_strchr(*store, '\n') != NULL)
 	{
@@ -24,8 +23,11 @@ int readline(char **store, char **line) //function to read until a '\n' is found
 
 		*line = ft_strsub(*store, 0, pos); //move all character until '\n' into store
 		temp = ft_strdup(ft_strchr(*store, '\n') + 1); // left over character after '\n' but before chunk size is reached are copied to tem
-		ft_strdel(store); //free store
+		free(*store); //free store
 		*store = temp; // point store to temp.
+        if ((*store)[0] == '\0')
+			ft_strdel(store);
+        free(*line);
 	}
 	else
 	{
@@ -39,7 +41,7 @@ int get_next_line(int fd, char **line)
 {
 	char		stackbuff[BUFF_SIZE + 1];
 	static char	*store;
-	int			bytes;
+	long        bytes;
 	char		*temp;
 
 	if (store == NULL)
@@ -48,13 +50,13 @@ int get_next_line(int fd, char **line)
 	{
 		stackbuff[bytes] = '\0'; //terminating the characters read by 'read' to be a string so we can work on it"
 		temp = ft_strjoin(store, stackbuff);
-		ft_strdel(&store);
+		free(store);
 		store = temp;
 	}
 	if	(bytes < 0 )
-		return(-1);
+		return(long)(-1);
 	else if	(bytes == 0 && ft_strlen(store) == 0)
-		return(0);
+		return(int)(0);
 	else
-		return	(readline(&store, line));
+		return	(long)(readline(&store, line));
 }
